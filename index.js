@@ -11,29 +11,42 @@ class Character {
 	}
 
 	battle(a, b) {
-		while (a.health && b.health) {
-			a.attack(b);
-			b.attack(a);
+		let count = 0;
+		let healthA = a.health;
+		let healthB = b.health;
+		const winnerArr = [];
+		if (count < 10) {
+			while (a.health && b.health) {
+				a.attack(b);
+				b.attack(a);
+			}
+			let winner;
+			if (!a.health) {
+				winner = b;
+			} else {
+				winner = a;
+			}
+			let winnerObj = {
+				winner
+			}
+			winnerArr.push(winnerObj);
+			count++;
+			a.health = healthA;
+			b.health = healthB;
 		}
-		if (!a.health) {
-			let winner = b;
-			console.log("A died.");
-		} else {
-			let winner = a;
-			console.log("B died.");
-		}
-	}
-
-	let winnerObj = {
-		winner
+		return winnerArr;
 	}
 }
 
-const red = new Character(10, 100);
-const blue = new Character(20, 60);
-
-const winnerArr = ['red', 'red', 'blue', 'blue', 'red'];
+let red = new Character(10, 100);
+let blue = new Character(20, 60);
 
 winnerArr.map((item, index) => { return { winner: item } });
+
+
+
+
+
+
 
 
